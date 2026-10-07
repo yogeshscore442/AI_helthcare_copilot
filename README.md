@@ -88,15 +88,29 @@ docker compose up --build -d
 - Frontend available at: `http://localhost:5173`
 - Backend API available at: `http://localhost:8000`
 
-### 2. Cloud Deployment (Render / Railway / Vercel)
-- **Backend (Web Service):**
-  - Build command: `pip install -r requirements.txt`
-  - Start command: `uvicorn praveen.backend.app.main:app --host 0.0.0.0 --port $PORT`
-  - Environment: `USE_MOCK_AI=true` (or provide `GEMINI_API_KEY`)
-- **Frontend (Static Site):**
-  - Root directory: `naveen/hi-main/hi-main/frontend`
-  - Build command: `npm install && npm run build`
-  - Publish directory: `dist`
+### 2. Cloud Deployment (Vercel + Render)
+
+The frontend is a Vite single-page app; the FastAPI backend and AI engine run together
+as one Render web service. The AI engine is a Python package used by the backend, not
+a separate web service.
+
+1. Create a Render Blueprint from this repository and deploy `render.yaml`. The
+   backend health check is `/api/health`. Keep `USE_MOCK_AI=true` for a demo, or set
+   it to `false` and add `LLM_API_KEY` in Render's secret environment variables to
+   enable live AI. Never put provider keys in Vercel or frontend source.
+2. Create a Vercel project from this repository with the root directory set to
+   `naveen/hi-main/hi-main/frontend`. Vercel detects the Vite build and the included
+   `vercel.json` provides SPA routing. Set the `VITE_API_URL` environment variable
+   to `https://<your-render-backend>.onrender.com/api`, then redeploy the frontend.
+3. In Render, set `CORS_ORIGINS` to the exact Vercel site origin, for example
+   `https://<your-vercel-project>.vercel.app` (no trailing slash). For a custom
+   domain, include its exact origin too. Separate multiple origins with commas.
+
+The current API does not implement user authentication, and the default database
+(SQLite) and uploaded files need persistent storage configured before relying on
+them across restarts. Deploy this as a demo with synthetic data only; do not upload
+real patient records until authentication, access controls, backups, and compliant
+storage have been implemented and reviewed.
 
 ---
 

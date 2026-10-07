@@ -1,10 +1,10 @@
 services:
-  # Backend API Web Service
   - type: web
     name: health-copilot-backend
     runtime: python
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn praveen.backend.app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.8
@@ -14,14 +14,3 @@ services:
         value: yogesh/healthcare_copilot_AI-Engine-main
       - key: PYTHONPATH
         value: praveen/backend:yogesh/healthcare_copilot_AI-Engine-main
-
-  # Frontend Static Site
-  - type: web
-    name: health-copilot-frontend
-    runtime: static
-    buildCommand: cd naveen/hi-main/hi-main/frontend && npm install && npm run build
-    staticPublishPath: naveen/hi-main/hi-main/frontend/dist
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html

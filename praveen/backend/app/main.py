@@ -8,6 +8,7 @@ main.py — FastAPI application entry point.
 from __future__ import annotations
 
 import logging
+import os
 import time
 import uuid
 from contextlib import asynccontextmanager
@@ -104,6 +105,11 @@ app.add_middleware(
         "http://localhost:8080",
         "http://127.0.0.1:5173",
         "http://127.0.0.1:5174",
+        *[
+            origin.strip()
+            for origin in os.getenv("CORS_ORIGINS", "").split(",")
+            if origin.strip()
+        ],
     ],
     allow_credentials=True,
     allow_methods=["*"],
