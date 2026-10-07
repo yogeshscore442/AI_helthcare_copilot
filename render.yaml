@@ -14,3 +14,5 @@ services:
         value: yogesh/healthcare_copilot_AI-Engine-main
       - key: PYTHONPATH
         value: praveen/backend:yogesh/healthcare_copilot_AI-Engine-main
+      - key: CORS_ORIGINS
+        value: https://ai-helthcare-copilot.vercel.app

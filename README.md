@@ -102,9 +102,9 @@ a separate web service.
    `naveen/hi-main/hi-main/frontend`. Vercel detects the Vite build and the included
    `vercel.json` provides SPA routing. Set the `VITE_API_URL` environment variable
    to `https://<your-render-backend>.onrender.com/api`, then redeploy the frontend.
-3. In Render, set `CORS_ORIGINS` to the exact Vercel site origin, for example
-   `https://<your-vercel-project>.vercel.app` (no trailing slash). For a custom
-   domain, include its exact origin too. Separate multiple origins with commas.
+3. The configured Vercel production origin is allowed by default. For a custom
+   domain or additional preview origins, set `CORS_ORIGINS` in Render to the exact
+   origin(s), without trailing slashes and comma-separated.
 
 The current API does not implement user authentication, and the default database
 (SQLite) and uploaded files need persistent storage configured before relying on

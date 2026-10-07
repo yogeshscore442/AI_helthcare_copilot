@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>AI Health Copilot</title>
+  <defs>
+    <linearGradient id="mark" x1="10" y1="8" x2="55" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5EEAD4"/>
+      <stop offset="1" stop-color="#38BDF8"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="19" fill="#0B1F2A"/>
+  <path d="M27 11h10v16h16v10H37v16H27V37H11V27h16V11Z" fill="url(#mark)"/>
+  <path d="M10 33h12l4-8 6 16 5-12 4 4h13" fill="none" stroke="#F8FAFC" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"/>
+  <circle cx="54" cy="33" r="2" fill="#F8FAFC"/>
+</svg>
